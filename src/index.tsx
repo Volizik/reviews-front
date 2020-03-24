@@ -6,12 +6,10 @@ import {CustomTheme} from './theme'
 import {BrowserRouter as Router} from "react-router-dom";
 
 ReactDOM.render(
-    <React.StrictMode>
-        <ThemeProvider theme={CustomTheme}>
-            <Router>
-                <App/>
-            </Router>
-        </ThemeProvider>
-    </React.StrictMode>,
+    <ThemeProvider theme={CustomTheme}>
+        <Router>
+            <App/>
+        </Router>
+    </ThemeProvider>,
     document.getElementById('root')
 );
