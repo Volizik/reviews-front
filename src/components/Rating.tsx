@@ -52,7 +52,7 @@ export const Rating: FC<RatingProps> = ({title, initialValue = 1, readOnly = fal
     return (
         <Box component="fieldset" borderColor="transparent">
             {title && <Typography component="legend">{title}</Typography>}
-            <Grid container xs={12}>
+            <Grid container item xs={12}>
                 <StyledRating
                     size='large'
                     name="rating"

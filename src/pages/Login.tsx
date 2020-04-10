@@ -1,12 +1,16 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import {Link, useHistory} from "react-router-dom";
+import {login} from '../services/auth';
+import {useFormik} from "formik";
+import {toast} from "react-toastify";
+import { setAuthCredentials } from '../services/auth'
+import {useDispatch} from "react-redux";
+import {getUserInfo} from "../store/user/thunks";
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -20,23 +24,44 @@ const useStyles = makeStyles((theme) => ({
 
 export const Login = () => {
     const classes = useStyles();
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        onSubmit: values => {
+            login(values)
+                .then((res) => {
+                        if (res.status === 200) {
+                            setAuthCredentials(res.data.accessToken);
+                            dispatch(getUserInfo());
+                            history.push('/');
+                        }
+                    }
+                )
+                .catch(error => toast(error.message, {type: "error"}));
+        },
+    });
 
     return (
         <>
             <Typography component="h1" variant="h5">
-                Sign in
+                Логин
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
                 <TextField
                     variant="outlined"
                     margin="normal"
                     required
                     fullWidth
                     id="email"
-                    label="Email Address"
+                    label="Email"
                     name="email"
                     autoComplete="email"
                     autoFocus
+                    onChange={formik.handleChange}
                 />
                 <TextField
                     variant="outlined"
@@ -44,14 +69,11 @@ export const Login = () => {
                     required
                     fullWidth
                     name="password"
-                    label="Password"
+                    label="Пароль"
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                />
-                <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Remember me"
+                    onChange={formik.handleChange}
                 />
                 <Button
                     type="submit"
@@ -60,17 +82,12 @@ export const Login = () => {
                     color="primary"
                     className={classes.submit}
                 >
-                    Sign In
+                   Войти
                 </Button>
                 <Grid container>
-                    <Grid item xs>
-                        <Link href="#" variant="body2">
-                            Forgot password?
-                        </Link>
-                    </Grid>
                     <Grid item>
-                        <Link href="#" variant="body2">
-                            {"Don't have an account? Sign Up"}
+                        <Link to='registration'>
+                            Нет аккаунта? Зарегистрироваться
                         </Link>
                     </Grid>
                 </Grid>

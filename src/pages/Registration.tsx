@@ -1,12 +1,13 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import {Link, useHistory} from "react-router-dom";
+import { useFormik } from 'formik';
+import {registration} from "../services/auth";
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -20,13 +21,34 @@ const useStyles = makeStyles((theme) => ({
 
 export const Registration = () => {
     const classes = useStyles();
+    const history = useHistory();
+    const formik = useFormik({
+        initialValues: {
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+        },
+        onSubmit: values => {
+            registration(values)
+                .then(
+                    (res) => {
+                        if (res.status === 201) {
+                            toast('Профиль создан', {type: "success"});
+                            history.push('/login');
+                        }
+                    }
+                )
+                .catch(error => toast(error.message, {type: "error"}));
+        },
+    });
 
     return (
         <>
             <Typography component="h1" variant="h5">
-                Sign up
+                Регистрация
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} noValidate onSubmit={formik.handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <TextField
@@ -36,8 +58,9 @@ export const Registration = () => {
                             required
                             fullWidth
                             id="firstName"
-                            label="First Name"
+                            label="Имя"
                             autoFocus
+                            onChange={formik.handleChange}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -46,9 +69,10 @@ export const Registration = () => {
                             required
                             fullWidth
                             id="lastName"
-                            label="Last Name"
+                            label="Фамилия"
                             name="lastName"
                             autoComplete="lname"
+                            onChange={formik.handleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -57,9 +81,10 @@ export const Registration = () => {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Email"
                             name="email"
                             autoComplete="email"
+                            onChange={formik.handleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -68,16 +93,11 @@ export const Registration = () => {
                             required
                             fullWidth
                             name="password"
-                            label="Password"
+                            label="Пароль"
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <FormControlLabel
-                            control={<Checkbox value="allowExtraEmails" color="primary" />}
-                            label="I want to receive inspiration, marketing promotions and updates via email."
+                            onChange={formik.handleChange}
                         />
                     </Grid>
                 </Grid>
@@ -88,12 +108,12 @@ export const Registration = () => {
                     color="primary"
                     className={classes.submit}
                 >
-                    Sign Up
+                    Зарегистрироваться
                 </Button>
                 <Grid container justify="flex-end">
                     <Grid item>
-                        <Link href="#" variant="body2">
-                            Already have an account? Sign in
+                        <Link to='login'>
+                            Уже есть аккаунт? Войти
                         </Link>
                     </Grid>
                 </Grid>
