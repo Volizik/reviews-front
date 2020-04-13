@@ -7,6 +7,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles({
     card: {
@@ -20,43 +21,42 @@ const useStyles = makeStyles({
     },
 });
 
-export interface ShortPostProps {
+export type ShortPostProps = {
+    id: number;
     title: string;
     date: string;
     description: string;
     image: string;
-    imageTitle: string;
 }
 
 export const ShortPost: FC<ShortPostProps> = (props) => {
     const classes = useStyles();
-    const { title, date, description, image, imageTitle } = props;
+    const { title, date, description, image, id } = props;
 
     return (
         <Grid item xs={12}>
-            <CardActionArea component="a" href="#">
-                <Card className={classes.card}>
-                    <div className={classes.cardDetails}>
-                        <CardContent>
-                            <Typography component="h2" variant="h5">
-                                {title}
-                            </Typography>
-                            <Typography variant="subtitle1" color="textSecondary">
-                                {date}
-                            </Typography>
-                            <Typography variant="subtitle1" paragraph>
-                                {description}
-                            </Typography>
-                            <Typography variant="subtitle1" color="primary">
-                                Continue reading...
-                            </Typography>
-                        </CardContent>
-                    </div>
-                    <Hidden xsDown>
-                        <CardMedia className={classes.cardMedia} image={image} title={imageTitle} />
-                    </Hidden>
-                </Card>
-            </CardActionArea>
+            <Link to={`/review/${id}`} style={{textDecoration: 'none'}}>
+                <CardActionArea>
+                    <Card className={classes.card}>
+                        <div className={classes.cardDetails}>
+                            <CardContent>
+                                <Typography component="h2" variant="h5">
+                                    {title}
+                                </Typography>
+                                <Typography variant="subtitle1" color="textSecondary">
+                                    {date}
+                                </Typography>
+                                <Typography variant="subtitle1" paragraph>
+                                    {description}
+                                </Typography>
+                            </CardContent>
+                        </div>
+                        <Hidden xsDown>
+                            <CardMedia className={classes.cardMedia} image={image} title={title} />
+                        </Hidden>
+                    </Card>
+                </CardActionArea>
+            </Link>
         </Grid>
     );
 };

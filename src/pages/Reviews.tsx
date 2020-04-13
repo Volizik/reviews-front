@@ -1,18 +1,24 @@
 import React from 'react';
-import {ShortPost, ShortPostProps} from "../components/ShortPost";
-
-const post: ShortPostProps = {
-    date: 'Сегодня',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-    title: 'Post title',
-    image: 'https://tinyjpg.com/images/social/website.jpg',
-    imageTitle: '',
-};
+import {ShortPost} from "../components/ShortPost";
+import {useSelector} from "react-redux";
+import {AppState} from "../store";
+import {ReviewItem} from "../interfaces/review";
 
 export const Reviews = () => {
+    const reviews = useSelector<AppState, ReviewItem[]>(state => state.review.list);
+
     return (
         <>
-            <ShortPost {...post} />
+            {reviews.map(({firstName, lastName, workingPosition, id}) => (
+                <ShortPost
+                    key={id}
+                    id={id}
+                    title={`${lastName} ${firstName}`}
+                    description={workingPosition}
+                    date='Сегодня'
+                    image='https://tinyjpg.com/images/social/website.jpg'
+                />
+            ))}
         </>
     );
 }

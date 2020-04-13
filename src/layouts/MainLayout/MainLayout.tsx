@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
@@ -6,6 +6,8 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { Copyright } from '../../components/Copyright';
 import {AppBar} from "../../components/AppBar";
+import {useDispatch} from "react-redux";
+import {getAllReviewsThunk} from "../../store/review/thunks";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,6 +34,11 @@ const useStyles = makeStyles((theme) => ({
 
 export const MainLayout: FC = ({ children }) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllReviewsThunk())
+    });
 
     return (
         <div className={classes.root}>

@@ -1,15 +1,14 @@
-import React, {FC} from 'react';
+import React, {FC, ReactElement} from 'react';
 import {createStyles, makeStyles} from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import AddIcon from '@material-ui/icons/Add';
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -24,6 +23,20 @@ const useStyles = makeStyles((theme) =>
         },
     })
 );
+
+export interface MenuListItem {
+    name: string;
+    icon: ReactElement;
+    link: string;
+}
+
+const menuList: MenuListItem[] = [
+    {
+        name: 'Добавить отзыв',
+        icon: <AddIcon />,
+        link: '/review/add'
+    }
+];
 
 export const Menu: FC = () => {
     const classes = useStyles();
@@ -52,22 +65,24 @@ export const Menu: FC = () => {
             onKeyDown={toggleDrawer(false)}
         >
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
+                {menuList.map((menuItem) => (
+                    <Link to={menuItem.link} style={{textDecoration: 'none', color: '#000'}} key={menuItem.link}>
+                        <ListItem button>
+                            <ListItemIcon>{menuItem.icon}</ListItemIcon>
+                            <ListItemText primary={menuItem.name} />
+                        </ListItem>
+                    </Link>
                 ))}
             </List>
-            <Divider />
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
+            {/*<Divider />*/}
+            {/*<List>*/}
+            {/*    {['All mail', 'Trash', 'Spam'].map((text, index) => (*/}
+            {/*        <ListItem button key={text}>*/}
+            {/*            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>*/}
+            {/*            <ListItemText primary={text} />*/}
+            {/*        </ListItem>*/}
+            {/*    ))}*/}
+            {/*</List>*/}
         </div>
     );
 
