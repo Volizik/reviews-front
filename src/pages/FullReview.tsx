@@ -65,7 +65,7 @@ export const FullReview: FC = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <Typography variant="h5" gutterBottom>
-                                    {activeReview.workingPosition}
+                                    {activeReview.workingPlace} {activeReview.workingPosition}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>

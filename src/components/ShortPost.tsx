@@ -57,6 +57,7 @@ export const ShortPost: FC<ShortPostProps> = (props) => {
                     </Card>
                 </CardActionArea>
             </Link>
+            <br/>
         </Grid>
     );
 };

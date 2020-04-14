@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import {Menu} from "./Menu";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppState} from "../store";
 import {setUserIsLoggedInAction, setUserInfoAction} from "../store/user/actions";
@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const AppBar = () =>  {
     const classes = useStyles();
+    const history = useHistory();
     const isLoggedIn = useSelector<AppState, boolean>(state => state.user.isLoggedIn);
     const dispatch = useDispatch();
 
@@ -31,13 +32,14 @@ export const AppBar = () =>  {
         dispatch(setUserIsLoggedInAction(false));
         dispatch(setUserInfoAction({}));
         removeAuthCredentials();
+        history.push('/')
     };
 
     return (
         <div className={classes.root}>
             <AppBarStyled position="static">
                 <Toolbar>
-                    <Menu />
+                    {isLoggedIn && <Menu />}
                     <Link to='/' style={{color: "white", textDecoration: 'none'}} className={classes.title}>
                         <Typography variant="h6">
                             Site name

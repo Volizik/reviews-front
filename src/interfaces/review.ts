@@ -11,6 +11,7 @@ export interface ReviewItem {
     workingCity: string;
     workingStreet: string;
     workingHouseNumber: string;
+    workingPlace: string;
     workingPosition: string;
     review: string;
 }

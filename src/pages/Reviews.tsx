@@ -9,7 +9,7 @@ export const Reviews = () => {
 
     return (
         <>
-            {reviews.map(({firstName, lastName, workingPosition, id}) => (
+            {reviews.length ? reviews.map(({firstName, lastName, workingPosition, id}) => (
                 <ShortPost
                     key={id}
                     id={id}
@@ -18,7 +18,7 @@ export const Reviews = () => {
                     date='Сегодня'
                     image='https://tinyjpg.com/images/social/website.jpg'
                 />
-            ))}
+            )) : (<h1>Нет отзывов</h1>)}
         </>
     );
 }
