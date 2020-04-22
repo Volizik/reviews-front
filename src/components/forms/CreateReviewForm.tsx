@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent, useRef, useState} from 'react';
 import { useFormik } from 'formik';
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import {createReview} from "../../services/review";
 import {toast} from "react-toastify";
 import {useHistory} from "react-router-dom";
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
 export interface CreateReviewDTO {
     firstName: string;
@@ -27,6 +29,8 @@ export interface CreateReviewDTO {
 
 export const CreateReviewForm = () => {
     const history = useHistory();
+    const inputFileRef = useRef<HTMLInputElement>(null);
+    const [file, setFile] = useState<File | null>(null);
     const formik = useFormik<CreateReviewDTO>({
         initialValues: {
             firstName: '',
@@ -45,7 +49,7 @@ export const CreateReviewForm = () => {
             review: '',
         },
         onSubmit: values => {
-            createReview(values)
+            createReview(values, file)
                 .then((res) => {
                     if (res.status === 201) {
                         toast(res.statusText, {type: "success"});
@@ -55,6 +59,13 @@ export const CreateReviewForm = () => {
                 .catch(error => toast(error.message, {type: "error"}));
         },
     });
+
+    const onInputFileChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        e.persist();
+        if (inputFileRef.current && inputFileRef.current.files) {
+            setFile(inputFileRef.current.files[0]);
+        }
+    }
 
     return (
         <form onSubmit={formik.handleSubmit}>
@@ -199,7 +210,7 @@ export const CreateReviewForm = () => {
                         value={formik.values.workingPosition}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={10}>
                     <TextField
                         id="review"
                         label="Отзыв о сотруднике"
@@ -210,6 +221,23 @@ export const CreateReviewForm = () => {
                         onChange={formik.handleChange}
                         value={formik.values.review}
                     />
+                </Grid>
+                <Grid item xs={2}>
+                    <input
+                        ref={inputFileRef}
+                        accept="image/*"
+                        style={{display: "none"}}
+                        id="icon-button-file"
+                        name='photo'
+                        type="file"
+                        onChange={onInputFileChangeHandler}
+                    />
+                    <label htmlFor="icon-button-file">
+                        <IconButton color="primary" aria-label="upload picture" component="span">
+                            <PhotoCamera />
+                        </IconButton>
+                    </label>
+                    <strong>{file ? file.name : 'Фото сотрудника'}</strong>
                 </Grid>
             </Grid>
             <br />

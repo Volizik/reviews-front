@@ -14,4 +14,6 @@ export interface ReviewItem {
     workingPlace: string;
     workingPosition: string;
     review: string;
+    photo: string;
+    createdAt: string;
 }

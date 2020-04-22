@@ -7,10 +7,32 @@ export const getAllReviews = async (): Promise<AxiosResponse<ReviewItem[]>> => {
     return client.get('/review');
 };
 
-export const getReviewById = async (id: number): Promise<AxiosResponse<ReviewItem>> => {
+export const getReviewById = async (id: string): Promise<AxiosResponse<ReviewItem>> => {
     return client.get(`/review/${id}`);
 };
 
-export const createReview = async (data: CreateReviewDTO): Promise<AxiosResponse> => {
-    return client.post('/review', data);
+export const createReview = async (data: CreateReviewDTO, photo: File | null): Promise<AxiosResponse> => {
+    const formData = new FormData();
+
+    formData.append('photo', photo || '');
+    formData.append('firstName', data.firstName);
+    formData.append('lastName', data.lastName);
+    formData.append('fatherName', data.fatherName);
+    formData.append('livingCountry', data.livingCountry);
+    formData.append('livingCity', data.livingCity);
+    formData.append('livingStreet', data.livingStreet);
+    formData.append('livingHouseNumber', data.livingHouseNumber);
+    formData.append('workingCountry', data.workingCountry);
+    formData.append('workingCity', data.workingCity);
+    formData.append('workingStreet', data.workingStreet);
+    formData.append('workingHouseNumber', data.workingHouseNumber);
+    formData.append('workingPosition', data.workingPosition);
+    formData.append('workingPlace', data.workingPlace);
+    formData.append('review', data.review);
+
+    return client.post('/review', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
 };

@@ -6,17 +6,16 @@ import {ReviewItem} from "../interfaces/review";
 
 export const Reviews = () => {
     const reviews = useSelector<AppState, ReviewItem[]>(state => state.review.list);
-
     return (
         <>
-            {reviews.length ? reviews.map(({firstName, lastName, workingPosition, id}) => (
+            {reviews.length ? reviews.map(({firstName, lastName, workingPosition, id, photo, createdAt}) => (
                 <ShortPost
                     key={id}
                     id={id}
                     title={`${lastName} ${firstName}`}
                     description={workingPosition}
-                    date='Сегодня'
-                    image='https://tinyjpg.com/images/social/website.jpg'
+                    date={new Date(createdAt).toLocaleString()}
+                    image={photo}
                 />
             )) : (<h1>Нет отзывов</h1>)}
         </>
