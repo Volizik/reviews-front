@@ -1,13 +1,13 @@
 import { AxiosResponse } from 'axios';
 import { client } from './'
 import {CreateReviewDTO} from "../components/forms/CreateReviewForm";
-import {ReviewItem} from "../interfaces/review";
+import {Review} from "../interfaces/review";
 
-export const getAllReviews = async (): Promise<AxiosResponse<ReviewItem[]>> => {
+export const getAllReviews = async (): Promise<AxiosResponse<Review[]>> => {
     return client.get('/review');
 };
 
-export const getReviewById = async (id: string): Promise<AxiosResponse<ReviewItem>> => {
+export const getReviewById = async (id: string): Promise<AxiosResponse<Review>> => {
     return client.get(`/review/${id}`);
 };
 
@@ -28,7 +28,7 @@ export const createReview = async (data: CreateReviewDTO, photo: File | null): P
     formData.append('workingHouseNumber', data.workingHouseNumber);
     formData.append('workingPosition', data.workingPosition);
     formData.append('workingPlace', data.workingPlace);
-    formData.append('review', data.review);
+    formData.append('text', data.text);
 
     return client.post('/review', formData, {
         headers: {

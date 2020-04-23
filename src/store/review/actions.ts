@@ -1,7 +1,7 @@
 import {SetReviewsListAction} from "./types";
-import {ReviewItem} from "../../interfaces/review";
+import {Review} from "../../interfaces/review";
 
-export const setReviewsListAction = (list: ReviewItem[]): SetReviewsListAction => ({
+export const setReviewsListAction = (list: Review[]): SetReviewsListAction => ({
     type: 'SET_REVIEWS_LIST',
     payload: list
 });

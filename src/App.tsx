@@ -4,17 +4,14 @@ import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {getUserInfo} from "./store/user/thunks";
 import {useDispatch} from "react-redux";
-import { setAuthCredentials } from './services/auth';
+import {setAuthHeaders} from './services/auth';
 
 function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            setAuthCredentials(token);
-            dispatch(getUserInfo());
-        }
+        setAuthHeaders();
+        dispatch(getUserInfo());
     });
 
   return (

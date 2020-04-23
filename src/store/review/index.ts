@@ -1,8 +1,8 @@
 import {ReviewsActionTypes} from "./types";
-import {ReviewItem} from "../../interfaces/review";
+import {Review} from "../../interfaces/review";
 
 export interface ReviewState {
-    list: ReviewItem[];
+    list: Review[];
 }
 export const initialState: ReviewState = {
     list: []

@@ -24,7 +24,7 @@ export interface CreateReviewDTO {
     workingHouseNumber: string;
     workingPosition: string;
     workingPlace: string
-    review: string;
+    text: string;
 }
 
 export const CreateReviewForm = () => {
@@ -46,7 +46,7 @@ export const CreateReviewForm = () => {
             workingHouseNumber: '',
             workingPosition: '',
             workingPlace: '',
-            review: '',
+            text: '',
         },
         onSubmit: values => {
             createReview(values, file)
@@ -212,14 +212,14 @@ export const CreateReviewForm = () => {
                 </Grid>
                 <Grid item xs={10}>
                     <TextField
-                        id="review"
+                        id="review_text"
                         label="Отзыв о сотруднике"
-                        name='review'
+                        name='text'
                         multiline
                         fullWidth
                         required
                         onChange={formik.handleChange}
-                        value={formik.values.review}
+                        value={formik.values.text}
                     />
                 </Grid>
                 <Grid item xs={2}>

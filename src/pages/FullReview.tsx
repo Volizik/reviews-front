@@ -2,12 +2,12 @@ import React, {FC, useEffect, useState} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { useParams } from "react-router-dom";
-import {ReviewItem} from "../interfaces/review";
+import {Review} from "../interfaces/review";
 import {getReviewById} from "../services/review";
 
 export const FullReview: FC = () => {
     const { id } = useParams();
-    const [review, setReview] = useState<ReviewItem | null>(null)
+    const [review, setReview] = useState<Review | null>(null)
 
     useEffect(() => {
         const getReview = async (id: string) => {
@@ -20,34 +20,25 @@ export const FullReview: FC = () => {
         }
     }, [id]);
 
-    //TODO: причесать страницу одного ревью
-
     return (
         <>{ review ? (
             <>
                 <Typography variant="h3" gutterBottom>
-                    {review.lastName} {review.firstName} {review.fatherName}
+                    {review.worker.lastName} {review.worker.firstName} {review.worker.fatherName}
                 </Typography>
                 <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        <img src={review.photo} alt="avatar" height={300} />
+                    <Grid item xs={12} md={4}>
+                        <img src={review.worker.photo} alt="avatar" height={300} />
                     </Grid>
-                    {/*<Grid item xs={12}>*/}
-                    {/*    <Rating initialValue={rating} readOnly title="Оценка работы сотрудника" />*/}
-                    {/*</Grid>*/}
-                    <Grid item xs={12}>
+                    <Grid item xs={12} md={8}>
                         <Typography variant="h5" gutterBottom>
-                            {review.workingCountry}, {review.workingCity}
+                            Адрес: {review.worker.workingCountry}, {review.worker.workingCity}
                         </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
                         <Typography variant="h5" gutterBottom>
-                            {review.workingPlace} {review.workingPosition}
+                            Место работы: {review.worker.workingPlace} {review.worker.workingPosition}
                         </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography variant="h5" gutterBottom>
-                            {review.review}
+                        <Typography variant="h5" gutterBottom style={{wordBreak: 'break-word'}}>
+                            Отзыв: {review.text}
                         </Typography>
                     </Grid>
                 </Grid>

@@ -1,23 +1,34 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ShortPost} from "../components/ShortPost";
-import {useSelector} from "react-redux";
-import {AppState} from "../store";
-import {ReviewItem} from "../interfaces/review";
+import {Review} from "../interfaces/review";
+import {getAllReviews} from "../services/review";
 
 export const Reviews = () => {
-    const reviews = useSelector<AppState, ReviewItem[]>(state => state.review.list);
+    const [reviews, setReviews] = useState<Review[] | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    useEffect(() => {
+        const getReviews = async () => {
+            setIsLoading(true)
+            const response = await getAllReviews();
+            console.log(response)
+            setReviews(response.data)
+            setIsLoading(false)
+        }
+        getReviews();
+    }, []);
+
     return (
         <>
-            {reviews.length ? reviews.map(({firstName, lastName, workingPosition, id, photo, createdAt}) => (
+            {reviews?.length ? reviews.map(({id, createdAt, worker}) => (
                 <ShortPost
                     key={id}
                     id={id}
-                    title={`${lastName} ${firstName}`}
-                    description={workingPosition}
+                    title={`${worker.lastName} ${worker.firstName}`}
+                    description={worker.workingPosition}
                     date={new Date(createdAt).toLocaleString()}
-                    image={photo}
+                    image={worker.photo}
                 />
-            )) : (<h1>Нет отзывов</h1>)}
+            )) : (isLoading ? <h1>Загрузка...</h1> : <h1>Нет отзывов</h1>)}
         </>
     );
 }
