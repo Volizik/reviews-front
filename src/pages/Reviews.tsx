@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {ShortPost} from "../components/ShortPost";
 import {Review} from "../interfaces/review";
 import {getAllReviews} from "../services/review";
+import {ReviewFilters} from "../components/ReviewFilters";
 
 export const Reviews = () => {
     const [reviews, setReviews] = useState<Review[] | null>(null);
@@ -19,6 +20,7 @@ export const Reviews = () => {
 
     return (
         <>
+            <ReviewFilters />
             {reviews?.length ? reviews.map(({id, createdAt, worker}) => (
                 <ShortPost
                     key={id}

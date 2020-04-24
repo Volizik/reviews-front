@@ -62,3 +62,7 @@ export const updateReview = async (reviewId: string, data: ReviewFormDTO, photo:
         }
     });
 };
+
+export const deleteReview = async (reviewId: string): Promise<AxiosResponse> => {
+    return client.delete(`/review/${reviewId}`);
+}
