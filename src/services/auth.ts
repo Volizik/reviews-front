@@ -14,14 +14,13 @@ interface LoginDTO {
 
 export const setAuthCredentials = (token: string) => {
     localStorage.setItem('token', token);
-    setAuthHeaders();
+    setAuthHeaders(token);
 };
 
-export const setAuthHeaders = () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-        client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }
+export const isAuthenticated = !!localStorage.getItem('token');
+
+export const setAuthHeaders = (token: string) => {
+    client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
 export const removeAuthCredentials = () => {

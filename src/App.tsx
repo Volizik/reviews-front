@@ -10,8 +10,11 @@ function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setAuthHeaders();
-        dispatch(getUserInfo());
+        const token = localStorage.getItem('token');
+        if (token) {
+            setAuthHeaders(token);
+            dispatch(getUserInfo());
+        }
     });
 
   return (

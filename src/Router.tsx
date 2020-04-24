@@ -7,27 +7,43 @@ import {AuthLayout} from "./layouts/AuthLayout";
 import {MainLayout} from "./layouts/MainLayout";
 import {CreateReview} from "./pages/CreateReview";
 import {FullReview} from "./pages/FullReview";
-import {useSelector} from "react-redux";
-import {AppState} from "./store";
 import {Reviews} from "./pages/Reviews";
+import {isAuthenticated} from "./services/auth";
+import {EditReview} from "./pages/EditReview";
 
-interface RouteWrapperProps extends RouteProps {
-    page: any;
-    layout: any;
-    privateRoute?: boolean;
+interface CustomRouteProps extends RouteProps {
+    page: FC<any>;
+    layout: FC<any>;
 }
-const RouteWrapper: FC<RouteWrapperProps> = ({
-    page: Component,
-    layout: Layout,
-    privateRoute = false,
-    ...rest
-}) => {
-    const isLoggedIn = useSelector<AppState, boolean>(state => state.user.isLoggedIn);
-/*TODO: fix private routes*/
+interface PrivateRouteProps extends CustomRouteProps {}
+interface PublicRouteProps extends CustomRouteProps {
+    restricted?: boolean;
+}
+
+const PrivateRoute: FC<PrivateRouteProps> = ({
+     page: Component,
+     layout: Layout,
+     ...rest
+ }) => {
     return (
         <Route {...rest} render={(props) => (
             <Layout {...props}>
-                {privateRoute ? isLoggedIn ? <Component {...props} /> : <Redirect to='/login' /> : <Component {...props} /> }
+                {isAuthenticated ? <Component {...props} /> : <Redirect to='/login' />}
+            </Layout>
+        )} />
+    );
+};
+
+const PublicRoute: FC<PublicRouteProps> = ({
+    page: Component,
+    layout: Layout,
+    restricted= false,
+    ...rest
+ }) => {
+    return (
+        <Route {...rest} render={(props) => (
+            <Layout {...props}>
+                {restricted ? <Redirect to='/' /> : <Component {...props} /> }
             </Layout>
         )} />
     );
@@ -35,10 +51,11 @@ const RouteWrapper: FC<RouteWrapperProps> = ({
 
 export const Router: FC = () => (
     <Switch>
-        <RouteWrapper path="/" page={Reviews} layout={MainLayout} exact />
-        <RouteWrapper path="/review/add" page={CreateReview} layout={MainLayout} exact />
-        <RouteWrapper path="/review/:id" page={FullReview} layout={MainLayout} />
-        <RouteWrapper path="/login" page={Login} layout={AuthLayout} />
-        <RouteWrapper path="/registration" page={Registration} layout={AuthLayout} />
+        <PublicRoute path="/" page={Reviews} layout={MainLayout} exact />
+        <PrivateRoute path="/review/add" page={CreateReview} layout={MainLayout} exact />
+        <PrivateRoute path="/review/edit/:id" page={EditReview} layout={MainLayout} exact />
+        <PublicRoute path="/review/:id" page={FullReview} layout={MainLayout} />
+        <PublicRoute path="/login" page={Login} layout={AuthLayout} restricted={isAuthenticated} />
+        <PrivateRoute path="/registration" page={Registration} layout={AuthLayout} />
     </Switch>
 );

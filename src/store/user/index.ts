@@ -1,20 +1,23 @@
 import {UserActionTypes} from "./types";
 
-interface Info {
-    id: number;
+export type UserInfo = {
+    id: string;
     firstName: string;
     lastName: string;
     email: string;
-}
-
-export type UserInfo = Info | {};
+};
 
 export interface UserState {
     info: UserInfo;
     isLoggedIn: boolean;
 }
 const initialState: UserState = {
-    info: {},
+    info: {
+        id: '',
+        email: '',
+        firstName: '',
+        lastName: ''
+    },
     isLoggedIn: false
 };
 

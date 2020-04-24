@@ -1,16 +1,12 @@
-import React, {ChangeEvent, useRef, useState} from 'react';
+import React, {ChangeEvent, FC, useRef, useState} from 'react';
 import { useFormik } from 'formik';
-import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import {createReview} from "../../services/review";
-import {toast} from "react-toastify";
-import {useHistory} from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
-export interface CreateReviewDTO {
+export interface ReviewFormDTO {
     firstName: string;
     lastName: string;
     fatherName: string;
@@ -27,37 +23,61 @@ export interface CreateReviewDTO {
     text: string;
 }
 
-export const CreateReviewForm = () => {
-    const history = useHistory();
+export interface ReviewFormProps {
+    firstName?: string;
+    lastName?: string;
+    fatherName?: string;
+    livingCountry?: string;
+    livingCity?: string;
+    livingStreet?: string;
+    livingHouseNumber?: string;
+    workingCountry?: string;
+    workingCity?: string;
+    workingStreet?: string;
+    workingHouseNumber?: string;
+    workingPosition?: string;
+    workingPlace?: string;
+    text?: string;
+    onSubmit: (values: ReviewFormDTO, file: File | null) => void;
+}
+
+export const ReviewForm: FC<ReviewFormProps> = ({
+    fatherName= '',
+    firstName= '',
+    lastName= '',
+    livingCity= '',
+    livingCountry= '',
+    livingHouseNumber= '',
+    livingStreet= '',
+    text= '',
+    workingCity= '',
+    workingCountry= '',
+    workingHouseNumber= '',
+    workingPlace= '',
+    workingPosition= '',
+    workingStreet= '',
+    onSubmit,
+}) => {
     const inputFileRef = useRef<HTMLInputElement>(null);
     const [file, setFile] = useState<File | null>(null);
-    const formik = useFormik<CreateReviewDTO>({
+    const formik = useFormik<ReviewFormDTO>({
         initialValues: {
-            firstName: '',
-            lastName: '',
-            fatherName: '',
-            livingCountry: '',
-            livingCity: '',
-            livingStreet: '',
-            livingHouseNumber: '',
-            workingCountry: '',
-            workingCity: '',
-            workingStreet: '',
-            workingHouseNumber: '',
-            workingPosition: '',
-            workingPlace: '',
-            text: '',
+            firstName,
+            lastName,
+            fatherName,
+            livingCountry,
+            livingCity,
+            livingStreet,
+            livingHouseNumber,
+            workingCountry,
+            workingCity,
+            workingStreet,
+            workingHouseNumber,
+            workingPosition,
+            workingPlace,
+            text,
         },
-        onSubmit: values => {
-            createReview(values, file)
-                .then((res) => {
-                    if (res.status === 201) {
-                        toast(res.statusText, {type: "success"});
-                        history.push('/');
-                    }
-                })
-                .catch(error => toast(error.message, {type: "error"}));
-        },
+        onSubmit: values => onSubmit(values, file),
     });
 
     const onInputFileChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -69,9 +89,6 @@ export const CreateReviewForm = () => {
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <Typography variant="h4" gutterBottom>
-                Добавить отзыв о сотруднике
-            </Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={4}>
                     <TextField
@@ -99,7 +116,6 @@ export const CreateReviewForm = () => {
                 </Grid>
                 <Grid item xs={12} sm={4}>
                     <TextField
-                        required
                         id="fatherName"
                         name="fatherName"
                         label="Отчество"

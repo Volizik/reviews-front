@@ -30,7 +30,7 @@ export const AppBar = () =>  {
 
     const onLogOutHandler = () => {
         dispatch(setUserIsLoggedInAction(false));
-        dispatch(setUserInfoAction({}));
+        dispatch(setUserInfoAction({lastName: '', id: '', firstName: '', email: ''}));
         removeAuthCredentials();
         history.push('/')
     };

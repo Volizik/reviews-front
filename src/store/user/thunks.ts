@@ -9,7 +9,7 @@ export const getUserInfo = () => async (dispatch: any) => {
         dispatch(setUserIsLoggedInAction(true));
     } else {
         console.error('error', response);
-        dispatch(setUserInfoAction({}));
+        dispatch(setUserInfoAction({lastName: '', id: '', firstName: '', email: ''}));
         dispatch(setUserIsLoggedInAction(false));
     }
 };

@@ -6,10 +6,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {makeStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import { Copyright } from '../../components/Copyright';
-import { Redirect } from 'react-router-dom';
-import {useSelector} from "react-redux";
-import {AppState} from "../../store";
-import {toast} from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -26,30 +22,19 @@ const useStyles = makeStyles((theme) => ({
 
 export const AuthLayout: FC = ({ children }) => {
     const classes = useStyles();
-    const isLoggedIn = useSelector<AppState, boolean>(state => state.user.isLoggedIn);
 
     return (
-        <>
-            {isLoggedIn ? (
-                <>
-                    {toast('Вы уже авторизованы', {type: "error"})}
-                    <Redirect to='/' />
-                </>
-                ) : (
-                <Container component="main" maxWidth="xs">
-                    <CssBaseline />
-                    <div className={classes.paper}>
-                        <Avatar className={classes.avatar}>
-                            <LockOutlinedIcon />
-                        </Avatar>
-                        {children}
-                    </div>
-                    <Box mt={8}>
-                        <Copyright />
-                    </Box>
-                </Container>
-            )}
-          }
-        </>
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                {children}
+            </div>
+            <Box mt={8}>
+                <Copyright />
+            </Box>
+        </Container>
     );
 };
