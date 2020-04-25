@@ -6,10 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import {Menu} from "./Menu";
 import {Link, useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {AppState} from "../store";
+import {useDispatch} from "react-redux";
 import {setUserIsLoggedInAction, setUserInfoAction} from "../store/user/actions";
-import {removeAuthCredentials} from "../services/auth";
+import {isAuthenticated, removeAuthCredentials} from "../services/auth";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -25,7 +24,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export const AppBar = () =>  {
     const classes = useStyles();
     const history = useHistory();
-    const isLoggedIn = useSelector<AppState, boolean>(state => state.user.isLoggedIn);
     const dispatch = useDispatch();
 
     const onLogOutHandler = () => {
@@ -39,13 +37,13 @@ export const AppBar = () =>  {
         <div className={classes.root}>
             <AppBarStyled position="static">
                 <Toolbar>
-                    {isLoggedIn && <Menu />}
+                    {isAuthenticated() && <Menu />}
                     <Link to='/' style={{color: "white", textDecoration: 'none'}} className={classes.title}>
                         <Typography variant="h6">
                             Site name
                         </Typography>
                     </Link>
-                    {isLoggedIn ? (
+                    {isAuthenticated() ? (
                         <Button onClick={onLogOutHandler} color="inherit">Выйти</Button>
                     ) : (
                         <Link to='/login' style={{color: "white", textDecoration: 'none'}}>

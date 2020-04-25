@@ -1,22 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {ShortPost} from "../components/ShortPost";
 import {Review} from "../interfaces/review";
-import {getAllReviews} from "../services/review";
 import {ReviewFilters} from "../components/ReviewFilters";
+import {useDispatch, useSelector} from "react-redux";
+import {getAllReviewsThunk} from "../store/review/thunks";
+import {AppState} from "../store";
 
 export const Reviews = () => {
-    const [reviews, setReviews] = useState<Review[] | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const reviews = useSelector<AppState, Review[]>(state => state.review.list)
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        const getReviews = async () => {
-            setIsLoading(true)
-            const response = await getAllReviews();
-            console.log(response)
-            setReviews(response.data)
-            setIsLoading(false)
-        }
-        getReviews();
-    }, []);
+        dispatch(getAllReviewsThunk());
+    }, [dispatch]);
 
     return (
         <>
@@ -30,7 +26,7 @@ export const Reviews = () => {
                     date={new Date(createdAt).toLocaleString()}
                     image={worker.photo}
                 />
-            )) : (isLoading ? <h1>Загрузка...</h1> : <h1>Нет отзывов</h1>)}
+            )) : <h1>Нет отзывов</h1>}
         </>
     );
 }

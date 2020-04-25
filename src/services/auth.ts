@@ -17,7 +17,7 @@ export const setAuthCredentials = (token: string) => {
     setAuthHeaders(token);
 };
 
-export const isAuthenticated = !!localStorage.getItem('token');
+export const isAuthenticated = () => !!localStorage.getItem('token');
 
 export const setAuthHeaders = (token: string) => {
     client.defaults.headers.common['Authorization'] = `Bearer ${token}`;

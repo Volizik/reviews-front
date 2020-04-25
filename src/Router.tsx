@@ -28,7 +28,7 @@ const PrivateRoute: FC<PrivateRouteProps> = ({
     return (
         <Route {...rest} render={(props) => (
             <Layout {...props}>
-                {isAuthenticated ? <Component {...props} /> : <Redirect to='/login' />}
+                {isAuthenticated() ? <Component {...props} /> : <Redirect to='/login' />}
             </Layout>
         )} />
     );
@@ -55,7 +55,7 @@ export const Router: FC = () => (
         <PrivateRoute path="/review/add" page={CreateReview} layout={MainLayout} exact />
         <PrivateRoute path="/review/edit/:id" page={EditReview} layout={MainLayout} exact />
         <PublicRoute path="/review/:id" page={FullReview} layout={MainLayout} />
-        <PublicRoute path="/login" page={Login} layout={AuthLayout} restricted={isAuthenticated} />
-        <PrivateRoute path="/registration" page={Registration} layout={AuthLayout} />
+        <PublicRoute path="/login" page={Login} layout={AuthLayout} restricted={isAuthenticated()} />
+        <PublicRoute path="/registration" page={Registration} layout={AuthLayout} restricted={isAuthenticated()} />
     </Switch>
 );

@@ -7,6 +7,11 @@ export const getAllReviews = async (): Promise<AxiosResponse<Review[]>> => {
     return client.get('/review');
 };
 
+export const getMyReviews = async (creatorId: string): Promise<AxiosResponse<Review[]>> => {
+    return client.get('/review', {params: {creatorId}});
+
+}
+
 export const getReviewById = async (id: string): Promise<AxiosResponse<Review>> => {
     return client.get(`/review/${id}`);
 };
