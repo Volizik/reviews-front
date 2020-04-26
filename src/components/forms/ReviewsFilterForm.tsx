@@ -29,7 +29,7 @@ export const ReviewsFilterForm = () => {
         },
         onSubmit: (values) => {
             console.log(values);
-            if (!!creatorId) {
+            if (creatorId) {
                 dispatch(
                     getReviewsThunk({
                         byCreator: values.byCreator ? creatorId : '',
