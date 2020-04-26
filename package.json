@@ -68,6 +68,6 @@
     }
   },
   "lint-staged": {
-    "*.(ts|tsx)": ["npm run lint:write", "npm run prettier", "git add"]
+    "*.(ts|tsx)": ["npm run lint:write && npm run prettier",  "git add"]
   }
 }
