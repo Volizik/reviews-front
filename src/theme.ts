@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'styled-components'
+import { DefaultTheme } from 'styled-components';
 
 const CustomTheme: DefaultTheme = {
     borderRadius: '5px',
@@ -9,4 +9,4 @@ const CustomTheme: DefaultTheme = {
     },
 };
 
-export { CustomTheme }
+export { CustomTheme };

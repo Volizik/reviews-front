@@ -1,8 +1,8 @@
-import React, {ChangeEvent, FC, useRef, useState} from 'react';
+import React, { ChangeEvent, FC, useRef, useState } from 'react';
 import { useFormik } from 'formik';
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
@@ -19,7 +19,7 @@ export interface ReviewFormDTO {
     workingStreet: string;
     workingHouseNumber: string;
     workingPosition: string;
-    workingPlace: string
+    workingPlace: string;
     text: string;
 }
 
@@ -42,20 +42,20 @@ export interface ReviewFormProps {
 }
 
 export const ReviewForm: FC<ReviewFormProps> = ({
-    fatherName= '',
-    firstName= '',
-    lastName= '',
-    livingCity= '',
-    livingCountry= '',
-    livingHouseNumber= '',
-    livingStreet= '',
-    text= '',
-    workingCity= '',
-    workingCountry= '',
-    workingHouseNumber= '',
-    workingPlace= '',
-    workingPosition= '',
-    workingStreet= '',
+    fatherName = '',
+    firstName = '',
+    lastName = '',
+    livingCity = '',
+    livingCountry = '',
+    livingHouseNumber = '',
+    livingStreet = '',
+    text = '',
+    workingCity = '',
+    workingCountry = '',
+    workingHouseNumber = '',
+    workingPlace = '',
+    workingPosition = '',
+    workingStreet = '',
     onSubmit,
 }) => {
     const inputFileRef = useRef<HTMLInputElement>(null);
@@ -77,7 +77,7 @@ export const ReviewForm: FC<ReviewFormProps> = ({
             workingPlace,
             text,
         },
-        onSubmit: values => onSubmit(values, file),
+        onSubmit: (values) => onSubmit(values, file),
     });
 
     const onInputFileChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +85,7 @@ export const ReviewForm: FC<ReviewFormProps> = ({
         if (inputFileRef.current && inputFileRef.current.files) {
             setFile(inputFileRef.current.files[0]);
         }
-    }
+    };
 
     return (
         <form onSubmit={formik.handleSubmit}>
@@ -93,11 +93,11 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 <Grid item xs={12} sm={4}>
                     <TextField
                         required
-                        id="lastName"
-                        name="lastName"
-                        label="Фамилия"
+                        id='lastName'
+                        name='lastName'
+                        label='Фамилия'
                         fullWidth
-                        autoComplete="lastname"
+                        autoComplete='lastname'
                         onChange={formik.handleChange}
                         value={formik.values.lastName}
                     />
@@ -105,31 +105,31 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 <Grid item xs={12} sm={4}>
                     <TextField
                         required
-                        id="firstName"
-                        name="firstName"
-                        label="Имя"
+                        id='firstName'
+                        name='firstName'
+                        label='Имя'
                         fullWidth
-                        autoComplete="firstname"
+                        autoComplete='firstname'
                         onChange={formik.handleChange}
                         value={formik.values.firstName}
                     />
                 </Grid>
                 <Grid item xs={12} sm={4}>
                     <TextField
-                        id="fatherName"
-                        name="fatherName"
-                        label="Отчество"
+                        id='fatherName'
+                        name='fatherName'
+                        label='Отчество'
                         fullWidth
-                        autoComplete="fathertname"
+                        autoComplete='fathertname'
                         onChange={formik.handleChange}
                         value={formik.values.fatherName}
                     />
                 </Grid>
                 <Grid item xs={12} sm={4}>
                     <TextField
-                        id="living_country"
-                        name="livingCountry"
-                        label="Страна проживания"
+                        id='living_country'
+                        name='livingCountry'
+                        label='Страна проживания'
                         fullWidth
                         onChange={formik.handleChange}
                         value={formik.values.livingCountry}
@@ -137,9 +137,9 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 </Grid>
                 <Grid item xs={12} sm={4}>
                     <TextField
-                        id="living_city"
-                        name="livingCity"
-                        label="Город проживания"
+                        id='living_city'
+                        name='livingCity'
+                        label='Город проживания'
                         fullWidth
                         onChange={formik.handleChange}
                         value={formik.values.livingCity}
@@ -147,9 +147,9 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 </Grid>
                 <Grid item xs={9} sm={3}>
                     <TextField
-                        id="living_street"
-                        name="livingStreet"
-                        label="Улица проживания"
+                        id='living_street'
+                        name='livingStreet'
+                        label='Улица проживания'
                         fullWidth
                         onChange={formik.handleChange}
                         value={formik.values.livingStreet}
@@ -157,9 +157,9 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 </Grid>
                 <Grid item xs={3} sm={1}>
                     <TextField
-                        id="living_house_number"
-                        name="livingHouseNumber"
-                        label="Дом"
+                        id='living_house_number'
+                        name='livingHouseNumber'
+                        label='Дом'
                         fullWidth
                         onChange={formik.handleChange}
                         value={formik.values.livingHouseNumber}
@@ -167,9 +167,9 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 </Grid>
                 <Grid item xs={12} sm={4}>
                     <TextField
-                        id="working_country"
-                        name="workingCountry"
-                        label="Страна рабочего места"
+                        id='working_country'
+                        name='workingCountry'
+                        label='Страна рабочего места'
                         fullWidth
                         onChange={formik.handleChange}
                         value={formik.values.workingCountry}
@@ -177,9 +177,9 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 </Grid>
                 <Grid item xs={12} sm={4}>
                     <TextField
-                        id="working_city"
-                        name="workingCity"
-                        label="Город рабочего места"
+                        id='working_city'
+                        name='workingCity'
+                        label='Город рабочего места'
                         fullWidth
                         onChange={formik.handleChange}
                         value={formik.values.workingCity}
@@ -187,9 +187,9 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 </Grid>
                 <Grid item xs={9} sm={3}>
                     <TextField
-                        id="working_street"
-                        name="workingStreet"
-                        label="Улица рабочего места"
+                        id='working_street'
+                        name='workingStreet'
+                        label='Улица рабочего места'
                         fullWidth
                         onChange={formik.handleChange}
                         value={formik.values.workingStreet}
@@ -197,9 +197,9 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 </Grid>
                 <Grid item xs={3} sm={1}>
                     <TextField
-                        id="working_house_number"
-                        name="workingHouseNumber"
-                        label="Дом"
+                        id='working_house_number'
+                        name='workingHouseNumber'
+                        label='Дом'
                         fullWidth
                         onChange={formik.handleChange}
                         value={formik.values.workingHouseNumber}
@@ -207,8 +207,8 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
-                        name="workingPlace"
-                        label="Место работы"
+                        name='workingPlace'
+                        label='Место работы'
                         fullWidth
                         required
                         onChange={formik.handleChange}
@@ -217,9 +217,9 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
-                        id="working_position"
-                        name="workingPosition"
-                        label="Должность"
+                        id='working_position'
+                        name='workingPosition'
+                        label='Должность'
                         fullWidth
                         required
                         onChange={formik.handleChange}
@@ -228,8 +228,8 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 </Grid>
                 <Grid item xs={10}>
                     <TextField
-                        id="review_text"
-                        label="Отзыв о сотруднике"
+                        id='review_text'
+                        label='Отзыв о сотруднике'
                         name='text'
                         multiline
                         fullWidth
@@ -241,15 +241,18 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 <Grid item xs={2}>
                     <input
                         ref={inputFileRef}
-                        accept="image/*"
-                        style={{display: "none"}}
-                        id="icon-button-file"
+                        accept='image/*'
+                        style={{ display: 'none' }}
+                        id='icon-button-file'
                         name='photo'
-                        type="file"
+                        type='file'
                         onChange={onInputFileChangeHandler}
                     />
-                    <label htmlFor="icon-button-file">
-                        <IconButton color="primary" aria-label="upload picture" component="span">
+                    <label htmlFor='icon-button-file'>
+                        <IconButton
+                            color='primary'
+                            aria-label='upload picture'
+                            component='span'>
                             <PhotoCamera />
                         </IconButton>
                     </label>
@@ -258,7 +261,12 @@ export const ReviewForm: FC<ReviewFormProps> = ({
             </Grid>
             <br />
             <br />
-            <Button variant="contained" color="primary" disableElevation type='submit' fullWidth >
+            <Button
+                variant='contained'
+                color='primary'
+                disableElevation
+                type='submit'
+                fullWidth>
                 Сохранить
             </Button>
         </form>

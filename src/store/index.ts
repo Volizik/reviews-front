@@ -1,9 +1,9 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from "redux-devtools-extension";
-import thunkMiddleware from "redux-thunk";
-import {workerReducer} from "./worker";
-import {userReducer} from "./user";
-import {reviewReducer} from "./review";
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunkMiddleware from 'redux-thunk';
+import { workerReducer } from './worker';
+import { userReducer } from './user';
+import { reviewReducer } from './review';
 
 export const rootReducer = combineReducers({
     worker: workerReducer,
@@ -17,8 +17,5 @@ export const configureStore = () => {
     const middlewares = [thunkMiddleware];
     const middleWareEnhancer = applyMiddleware(...middlewares);
 
-    return createStore(
-        rootReducer,
-        composeWithDevTools(middleWareEnhancer)
-    );
+    return createStore(rootReducer, composeWithDevTools(middleWareEnhancer));
 };

@@ -1,4 +1,4 @@
-import {UserActionTypes} from "./types";
+import { UserActionTypes } from './types';
 
 export type UserInfo = {
     id: string;
@@ -16,22 +16,25 @@ const initialState: UserState = {
         id: '',
         email: '',
         firstName: '',
-        lastName: ''
+        lastName: '',
     },
-    isLoggedIn: false
+    isLoggedIn: false,
 };
 
-export const userReducer = (state = initialState, action: UserActionTypes): UserState => {
+export const userReducer = (
+    state = initialState,
+    action: UserActionTypes,
+): UserState => {
     switch (action.type) {
         case 'SET_USER_INFO':
             return {
                 ...state,
-                info: action.payload
+                info: action.payload,
             };
         case 'SET_USER_IS_LOGGED_IN':
             return {
                 ...state,
-                isLoggedIn: action.payload
+                isLoggedIn: action.payload,
             };
         default:
             return state;

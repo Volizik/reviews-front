@@ -1,13 +1,13 @@
-import React, {FC, useEffect} from 'react';
+import React, { FC, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { Copyright } from '../../components/Copyright';
-import {AppBar} from "../../components/AppBar";
-import {useDispatch} from "react-redux";
-import {getAllReviewsThunk} from "../../store/review/thunks";
+import { AppBar } from '../../components/AppBar';
+import { useDispatch } from 'react-redux';
+import { getReviewsThunk } from '../../store/review/thunks';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,25 +37,23 @@ export const MainLayout: FC = ({ children }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getAllReviewsThunk())
+        dispatch(getReviewsThunk());
     });
 
     return (
         <div className={classes.root}>
-            <CssBaseline/>
+            <CssBaseline />
             <AppBar />
 
             <main className={classes.content}>
-                <Container maxWidth="lg" className={classes.container}>
+                <Container maxWidth='lg' className={classes.container}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <div className={classes.paper}>
-                                {children}
-                            </div>
+                            <div className={classes.paper}>{children}</div>
                         </Grid>
                     </Grid>
                     <Box pt={4}>
-                        <Copyright/>
+                        <Copyright />
                     </Box>
                 </Container>
             </main>

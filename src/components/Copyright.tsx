@@ -1,11 +1,11 @@
-import React, {FC} from 'react';
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
+import React, { FC } from 'react';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 
 export const Copyright: FC = () => (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant='body2' color='textSecondary' align='center'>
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
+        <Link color='inherit' href='https://material-ui.com/'>
             Your Website
         </Link>{' '}
         {new Date().getFullYear()}

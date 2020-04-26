@@ -1,10 +1,10 @@
-import React, {FC} from 'react';
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Avatar from "@material-ui/core/Avatar";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import {makeStyles} from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
+import React, { FC } from 'react';
+import Container from '@material-ui/core/Container';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import { Copyright } from '../../components/Copyright';
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +24,7 @@ export const AuthLayout: FC = ({ children }) => {
     const classes = useStyles();
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component='main' maxWidth='xs'>
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>

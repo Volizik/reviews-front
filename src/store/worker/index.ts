@@ -1,18 +1,21 @@
-import {ADD_WORKER, GET_ALL_WORKERS, WorkerActionTypes} from "./types";
+import { ADD_WORKER, GET_ALL_WORKERS, WorkerActionTypes } from './types';
 
 export interface WorkerState {
     list: [];
 }
 export const initialState: WorkerState = {
-    list: []
+    list: [],
 };
 
-export const workerReducer = (state = initialState, action: WorkerActionTypes): WorkerState => {
+export const workerReducer = (
+    state = initialState,
+    action: WorkerActionTypes,
+): WorkerState => {
     switch (action.type) {
         case ADD_WORKER:
             return {
                 ...state,
-                ...action.payload
+                ...action.payload,
             };
         case GET_ALL_WORKERS:
             return {

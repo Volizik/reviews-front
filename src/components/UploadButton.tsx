@@ -21,9 +21,17 @@ export const UploadButton = () => {
 
     return (
         <div className={classes.root}>
-            <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
-            <label htmlFor="icon-button-file">
-                <IconButton color="primary" aria-label="upload picture" component="span">
+            <input
+                accept='image/*'
+                className={classes.input}
+                id='icon-button-file'
+                type='file'
+            />
+            <label htmlFor='icon-button-file'>
+                <IconButton
+                    color='primary'
+                    aria-label='upload picture'
+                    component='span'>
                     <PhotoCamera />
                 </IconButton>
             </label>

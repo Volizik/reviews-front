@@ -1,5 +1,5 @@
 import { client } from './';
-import {AxiosResponse} from "axios";
+import { AxiosResponse } from 'axios';
 
 interface RegistrationDTO {
     firstName: string;
@@ -21,7 +21,7 @@ export const isAuthenticated = () => !!localStorage.getItem('token');
 
 export const setAuthHeaders = (token: string) => {
     client.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-}
+};
 
 export const removeAuthCredentials = () => {
     localStorage.removeItem('token');
@@ -32,6 +32,8 @@ export const registration = (data: RegistrationDTO): Promise<AxiosResponse> => {
     return client.post('/auth/registration', data);
 };
 
-export const login = (data: LoginDTO): Promise<AxiosResponse<{accessToken: string}>> => {
+export const login = (
+    data: LoginDTO,
+): Promise<AxiosResponse<{ accessToken: string }>> => {
     return client.post('/auth/login', data);
 };

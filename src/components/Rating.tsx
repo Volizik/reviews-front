@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, { FC, useState } from 'react';
 import StyledRating, { IconContainerProps } from '@material-ui/lab/Rating';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
@@ -7,9 +7,11 @@ import SentimentSatisfiedAltIcon from '@material-ui/icons/SentimentSatisfiedAltO
 import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Grid from "@material-ui/core/Grid";
+import Grid from '@material-ui/core/Grid';
 
-const customIcons: { [index: string]: { icon: React.ReactElement; label: string } } = {
+const customIcons: {
+    [index: string]: { icon: React.ReactElement; label: string };
+} = {
     1: {
         icon: <SentimentVeryDissatisfiedIcon />,
         label: 'Очень недоволен',
@@ -44,18 +46,22 @@ export interface RatingProps {
     showTextValue?: boolean;
 }
 
-export const Rating: FC<RatingProps> = ({title, initialValue = 1, readOnly = false, showTextValue = false}) => {
-    const [ value, setValue ] = useState(initialValue);
-    const [ hover, setHover ] = useState(value);
-
+export const Rating: FC<RatingProps> = ({
+    title,
+    initialValue = 1,
+    readOnly = false,
+    showTextValue = false,
+}) => {
+    const [value, setValue] = useState(initialValue);
+    const [hover, setHover] = useState(value);
 
     return (
-        <Box component="fieldset" borderColor="transparent">
-            {title && <Typography component="legend">{title}</Typography>}
+        <Box component='fieldset' borderColor='transparent'>
+            {title && <Typography component='legend'>{title}</Typography>}
             <Grid container item xs={12}>
                 <StyledRating
                     size='large'
-                    name="rating"
+                    name='rating'
                     defaultValue={value}
                     getLabelText={(value: number) => customIcons[value].label}
                     IconContainerComponent={IconContainer}
@@ -67,9 +73,12 @@ export const Rating: FC<RatingProps> = ({title, initialValue = 1, readOnly = fal
                         setHover(newHover || 1);
                     }}
                 />
-                {value !== null && showTextValue && <Box ml={2}>{customIcons[hover !== -1 ? hover : value].label}</Box>}
+                {value !== null && showTextValue && (
+                    <Box ml={2}>
+                        {customIcons[hover !== -1 ? hover : value].label}
+                    </Box>
+                )}
             </Grid>
-
         </Box>
     );
-}
+};

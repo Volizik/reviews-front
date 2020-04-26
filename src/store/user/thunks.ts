@@ -1,5 +1,5 @@
-import {client} from "../../services";
-import {setUserInfoAction, setUserIsLoggedInAction} from "./actions";
+import { client } from '../../services';
+import { setUserInfoAction, setUserIsLoggedInAction } from './actions';
 
 export const getUserInfo = () => async (dispatch: any) => {
     const response = await client.get('/user/me');
@@ -9,7 +9,14 @@ export const getUserInfo = () => async (dispatch: any) => {
         dispatch(setUserIsLoggedInAction(true));
     } else {
         console.error('error', response);
-        dispatch(setUserInfoAction({lastName: '', id: '', firstName: '', email: ''}));
+        dispatch(
+            setUserInfoAction({
+                lastName: '',
+                id: '',
+                firstName: '',
+                email: '',
+            }),
+        );
         dispatch(setUserIsLoggedInAction(false));
     }
 };

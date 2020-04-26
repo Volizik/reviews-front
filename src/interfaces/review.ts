@@ -1,4 +1,4 @@
-import {Worker} from "./worker";
+import { Worker } from './worker';
 
 export interface Review {
     id: number;
@@ -6,4 +6,8 @@ export interface Review {
     creatorId: number;
     createdAt: string;
     worker: Worker;
+}
+
+export interface ReviewsFilterDTO {
+    byCreator?: string;
 }

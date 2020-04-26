@@ -1,5 +1,5 @@
-import React, {FC, ReactElement} from 'react';
-import {createStyles, makeStyles} from '@material-ui/core/styles';
+import React, { FC, ReactElement } from 'react';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -8,7 +8,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AddIcon from '@material-ui/icons/Add';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) =>
         menuButton: {
             marginRight: theme.spacing(2),
         },
-    })
+    }),
 );
 
 export interface MenuListItem {
@@ -34,8 +34,8 @@ const menuList: MenuListItem[] = [
     {
         name: 'Добавить отзыв',
         icon: <AddIcon />,
-        link: '/review/add'
-    }
+        link: '/review/add',
+    },
 ];
 
 export const Menu: FC = () => {
@@ -60,13 +60,15 @@ export const Menu: FC = () => {
     const list = () => (
         <div
             className={classes.list}
-            role="presentation"
+            role='presentation'
             onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}
-        >
+            onKeyDown={toggleDrawer(false)}>
             <List>
                 {menuList.map((menuItem) => (
-                    <Link to={menuItem.link} style={{textDecoration: 'none', color: '#000'}} key={menuItem.link}>
+                    <Link
+                        to={menuItem.link}
+                        style={{ textDecoration: 'none', color: '#000' }}
+                        key={menuItem.link}>
                         <ListItem button>
                             <ListItemIcon>{menuItem.icon}</ListItemIcon>
                             <ListItemText primary={menuItem.name} />
@@ -88,15 +90,19 @@ export const Menu: FC = () => {
 
     return (
         <div>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+            <IconButton
+                edge='start'
+                className={classes.menuButton}
+                color='inherit'
+                aria-label='menu'
+                onClick={toggleDrawer(true)}>
                 <MenuIcon />
             </IconButton>
             <SwipeableDrawer
                 anchor='left'
                 open={state}
                 onClose={toggleDrawer(false)}
-                onOpen={toggleDrawer(true)}
-            >
+                onOpen={toggleDrawer(true)}>
                 {list()}
             </SwipeableDrawer>
         </div>

@@ -1,4 +1,4 @@
-import React, {FC, ReactNode, useState} from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -19,7 +19,7 @@ export const AlertDialog: FC<AlertDialogProps> = ({
     text,
     buttonComponent,
     onAgree,
-    onDisagree= () => {}
+    onDisagree = () => {},
 }) => {
     const [open, setOpen] = useState<boolean>(false);
 
@@ -30,12 +30,12 @@ export const AlertDialog: FC<AlertDialogProps> = ({
     const onAgreeHandler = () => {
         handleClose();
         onAgree();
-    }
+    };
 
     const onDisagreeHandler = () => {
         handleClose();
         onDisagree();
-    }
+    };
 
     return (
         <div>
@@ -43,18 +43,24 @@ export const AlertDialog: FC<AlertDialogProps> = ({
             <Dialog
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
+                aria-labelledby='alert-dialog-title'
+                aria-describedby='alert-dialog-description'>
                 <DialogTitle>{title}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>{text}</DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={onAgreeHandler} color="primary">Да</Button>
-                    <Button onClick={onDisagreeHandler} color="primary" autoFocus>Нет</Button>
+                    <Button onClick={onAgreeHandler} color='primary'>
+                        Да
+                    </Button>
+                    <Button
+                        onClick={onDisagreeHandler}
+                        color='primary'
+                        autoFocus>
+                        Нет
+                    </Button>
                 </DialogActions>
             </Dialog>
         </div>
     );
-}
+};

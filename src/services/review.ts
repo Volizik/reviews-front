@@ -1,22 +1,28 @@
 import { AxiosResponse } from 'axios';
-import { client } from './'
-import {ReviewFormDTO} from "../components/forms/ReviewForm";
-import {Review} from "../interfaces/review";
+import { client } from './';
+import { ReviewFormDTO } from '../components/forms/ReviewForm';
+import { Review, ReviewsFilterDTO } from '../interfaces/review';
 
-export const getAllReviews = async (): Promise<AxiosResponse<Review[]>> => {
-    return client.get('/review');
+export const getAllReviews = async (
+    reviewsFilterDTO: ReviewsFilterDTO = {},
+): Promise<AxiosResponse<Review[]>> => {
+    return client.get('/review', { params: reviewsFilterDTO });
 };
 
-export const getMyReviews = async (creatorId: string): Promise<AxiosResponse<Review[]>> => {
-    return client.get('/review', {params: {creatorId}});
+// export const getMyReviews = async (reviewsFilterDTO: ReviewsFilterDTO): Promise<AxiosResponse<Review[]>> => {
+//     return client.get('/review', {params: reviewsFilterDTO});
+// }
 
-}
-
-export const getReviewById = async (id: string): Promise<AxiosResponse<Review>> => {
+export const getReviewById = async (
+    id: string,
+): Promise<AxiosResponse<Review>> => {
     return client.get(`/review/${id}`);
 };
 
-export const createReview = async (data: ReviewFormDTO, photo: File | null): Promise<AxiosResponse<Review>> => {
+export const createReview = async (
+    data: ReviewFormDTO,
+    photo: File | null,
+): Promise<AxiosResponse<Review>> => {
     const formData = new FormData();
 
     formData.append('photo', photo || '');
@@ -37,12 +43,16 @@ export const createReview = async (data: ReviewFormDTO, photo: File | null): Pro
 
     return client.post('/review', formData, {
         headers: {
-            'Content-Type': 'multipart/form-data'
-        }
+            'Content-Type': 'multipart/form-data',
+        },
     });
 };
 
-export const updateReview = async (reviewId: string, data: ReviewFormDTO, photo: File | null): Promise<AxiosResponse<Review>> => {
+export const updateReview = async (
+    reviewId: string,
+    data: ReviewFormDTO,
+    photo: File | null,
+): Promise<AxiosResponse<Review>> => {
     const formData = new FormData();
 
     formData.append('photo', photo || '');
@@ -63,11 +73,13 @@ export const updateReview = async (reviewId: string, data: ReviewFormDTO, photo:
 
     return client.put(`/review/${reviewId}`, formData, {
         headers: {
-            'Content-Type': 'multipart/form-data'
-        }
+            'Content-Type': 'multipart/form-data',
+        },
     });
 };
 
-export const deleteReview = async (reviewId: string): Promise<AxiosResponse> => {
+export const deleteReview = async (
+    reviewId: string,
+): Promise<AxiosResponse> => {
     return client.delete(`/review/${reviewId}`);
-}
+};
