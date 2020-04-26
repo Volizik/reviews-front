@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { Checkbox } from '@material-ui/core';
+import {Checkbox} from '@material-ui/core';
 import { getReviewsThunk } from '../../store/review/thunks';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -16,12 +16,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 );
-//
-// const filters = [
-//     {
-//         label: 'Только мои отзывы',
-//     }
-// ]
 
 export const ReviewsFilterForm = () => {
     const classes = useStyles();
