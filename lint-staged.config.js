@@ -1,3 +1,4 @@
+/* eslint-disable */
 const escape = require('shell-quote').quote;
 
 const esc = (args) => {

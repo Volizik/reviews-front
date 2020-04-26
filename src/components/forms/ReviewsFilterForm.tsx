@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import {Checkbox} from '@material-ui/core';
-import { getReviewsThunk } from '../../store/review/thunks';
+import {getReviewsThunk } from '../../store/review/thunks';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
