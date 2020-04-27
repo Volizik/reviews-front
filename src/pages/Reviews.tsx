@@ -19,8 +19,8 @@ export const Reviews = () => {
     return (
         <>
             <ReviewFilters />
-            {reviews?.length ? (
-                reviews.map(({ id, createdAt, worker }) => (
+            {reviews.length ? (
+                reviews.forEach(({ id, createdAt, worker }) => (
                     <ShortPost
                         key={id}
                         id={id}
