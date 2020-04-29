@@ -2,17 +2,20 @@ export interface Worker {
     firstName: string;
     lastName: string;
     fatherName: string;
-    livingCountry: string;
-    livingCity: string;
-    livingStreet: string;
-    livingHouseNumber: string;
-    workingCountry: string;
-    workingCity: string;
-    workingStreet: string;
-    workingHouseNumber: string;
+    country: string;
+    city: string;
     workingPlace: string;
-    workingPosition: string;
-    photo: string;
+    position: string;
+    photos: Photo[];
     creatorId: number;
     createdAt: string;
+    updatedAt: string;
+}
+
+export interface Photo {
+    id: string;
+    src: string;
+    workerId: string;
+    createdAt: string;
+    updatedAt: string;
 }

@@ -9,37 +9,33 @@ export const getAllReviews = async (
     return client.get('/review', { params: reviewsFilterDTO });
 };
 
-// export const getMyReviews = async (reviewsFilterDTO: ReviewsFilterDTO): Promise<AxiosResponse<Review[]>> => {
-//     return client.get('/review', {params: reviewsFilterDTO});
-// }
-
 export const getReviewById = async (
     id: string,
 ): Promise<AxiosResponse<Review>> => {
     return client.get(`/review/${id}`);
 };
 
-export const createReview = async (
-    data: ReviewFormDTO,
-    photo: File | null,
-): Promise<AxiosResponse<Review>> => {
+const createReviewFormData = (data: ReviewFormDTO, photo: File | null): FormData => {
     const formData = new FormData();
 
     formData.append('photo', photo || '');
     formData.append('firstName', data.firstName);
     formData.append('lastName', data.lastName);
     formData.append('fatherName', data.fatherName);
-    formData.append('livingCountry', data.livingCountry);
-    formData.append('livingCity', data.livingCity);
-    formData.append('livingStreet', data.livingStreet);
-    formData.append('livingHouseNumber', data.livingHouseNumber);
-    formData.append('workingCountry', data.workingCountry);
-    formData.append('workingCity', data.workingCity);
-    formData.append('workingStreet', data.workingStreet);
-    formData.append('workingHouseNumber', data.workingHouseNumber);
-    formData.append('workingPosition', data.workingPosition);
+    formData.append('country', data.country);
+    formData.append('city', data.city);
+    formData.append('position', data.position);
     formData.append('workingPlace', data.workingPlace);
     formData.append('text', data.text);
+
+    return formData;
+}
+
+export const createReview = async (
+    data: ReviewFormDTO,
+    photo: File | null,
+): Promise<AxiosResponse<Review>> => {
+    const formData = createReviewFormData(data, photo);
 
     return client.post('/review', formData, {
         headers: {
@@ -53,23 +49,7 @@ export const updateReview = async (
     data: ReviewFormDTO,
     photo: File | null,
 ): Promise<AxiosResponse<Review>> => {
-    const formData = new FormData();
-
-    formData.append('photo', photo || '');
-    formData.append('firstName', data.firstName);
-    formData.append('lastName', data.lastName);
-    formData.append('fatherName', data.fatherName);
-    formData.append('livingCountry', data.livingCountry);
-    formData.append('livingCity', data.livingCity);
-    formData.append('livingStreet', data.livingStreet);
-    formData.append('livingHouseNumber', data.livingHouseNumber);
-    formData.append('workingCountry', data.workingCountry);
-    formData.append('workingCity', data.workingCity);
-    formData.append('workingStreet', data.workingStreet);
-    formData.append('workingHouseNumber', data.workingHouseNumber);
-    formData.append('workingPosition', data.workingPosition);
-    formData.append('workingPlace', data.workingPlace);
-    formData.append('text', data.text);
+    const formData = createReviewFormData(data, photo);
 
     return client.put(`/review/${reviewId}`, formData, {
         headers: {

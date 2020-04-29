@@ -108,7 +108,7 @@ export const FullReview: FC = () => {
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={4}>
                             <img
-                                src={review.worker.photo}
+                                src={review.worker.photos[0].src}
                                 alt='avatar'
                                 height={300}
                             />
@@ -116,13 +116,13 @@ export const FullReview: FC = () => {
                         <Grid item xs={12} md={8}>
                             <Typography variant='h5' gutterBottom>
                                 <strong>Адрес проживания:</strong>{' '}
-                                {review.worker.livingCountry},{' '}
-                                {review.worker.livingCity}
+                                {review.worker.country},{' '}
+                                {review.worker.city}
                             </Typography>
                             <Typography variant='h5' gutterBottom>
                                 <strong>Место работы:</strong>{' '}
                                 {review.worker.workingPlace}{' '}
-                                {review.worker.workingPosition}
+                                {review.worker.position}
                             </Typography>
                             <Typography
                                 variant='h5'

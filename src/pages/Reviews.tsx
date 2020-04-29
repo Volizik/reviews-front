@@ -19,15 +19,15 @@ export const Reviews = () => {
     return (
         <>
             <ReviewFilters />
-            {reviews.length ? (
-                reviews.forEach(({ id, createdAt, worker }) => (
+            {reviews?.length ? (
+                reviews.map(({ id, createdAt, worker }) => (
                     <ShortPost
                         key={id}
                         id={id}
                         title={`${worker.lastName} ${worker.firstName}`}
-                        description={worker.workingPosition}
+                        description={worker.position}
                         date={new Date(createdAt).toLocaleString()}
-                        image={worker.photo}
+                        image={worker.photos[0].src}
                     />
                 ))
             ) : (

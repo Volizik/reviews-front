@@ -30,7 +30,7 @@ export interface MenuListItem {
     link: string;
 }
 
-const menuList: MenuListItem[] = [
+export const menuList: MenuListItem[] = [
     {
         name: 'Добавить отзыв',
         icon: <AddIcon />,

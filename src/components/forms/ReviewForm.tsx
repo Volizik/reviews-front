@@ -10,34 +10,14 @@ export interface ReviewFormDTO {
     firstName: string;
     lastName: string;
     fatherName: string;
-    livingCountry: string;
-    livingCity: string;
-    livingStreet: string;
-    livingHouseNumber: string;
-    workingCountry: string;
-    workingCity: string;
-    workingStreet: string;
-    workingHouseNumber: string;
-    workingPosition: string;
+    country: string;
+    city: string;
+    position: string;
     workingPlace: string;
     text: string;
 }
 
-export interface ReviewFormProps {
-    firstName?: string;
-    lastName?: string;
-    fatherName?: string;
-    livingCountry?: string;
-    livingCity?: string;
-    livingStreet?: string;
-    livingHouseNumber?: string;
-    workingCountry?: string;
-    workingCity?: string;
-    workingStreet?: string;
-    workingHouseNumber?: string;
-    workingPosition?: string;
-    workingPlace?: string;
-    text?: string;
+export interface ReviewFormProps extends Partial<ReviewFormDTO> {
     onSubmit: (values: ReviewFormDTO, file: File | null) => void;
 }
 
@@ -45,17 +25,11 @@ export const ReviewForm: FC<ReviewFormProps> = ({
     fatherName = '',
     firstName = '',
     lastName = '',
-    livingCity = '',
-    livingCountry = '',
-    livingHouseNumber = '',
-    livingStreet = '',
     text = '',
-    workingCity = '',
-    workingCountry = '',
-    workingHouseNumber = '',
     workingPlace = '',
-    workingPosition = '',
-    workingStreet = '',
+    position = '',
+    city = '',
+    country = '',
     onSubmit,
 }) => {
     const inputFileRef = useRef<HTMLInputElement>(null);
@@ -65,15 +39,9 @@ export const ReviewForm: FC<ReviewFormProps> = ({
             firstName,
             lastName,
             fatherName,
-            livingCountry,
-            livingCity,
-            livingStreet,
-            livingHouseNumber,
-            workingCountry,
-            workingCity,
-            workingStreet,
-            workingHouseNumber,
-            workingPosition,
+            city,
+            country,
+            position,
             workingPlace,
             text,
         },
@@ -125,84 +93,24 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                         value={formik.values.fatherName}
                     />
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={12} sm={6}>
                     <TextField
-                        id='living_country'
-                        name='livingCountry'
+                        id='country'
+                        name='country'
                         label='Страна проживания'
                         fullWidth
                         onChange={formik.handleChange}
-                        value={formik.values.livingCountry}
+                        value={formik.values.country}
                     />
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={12} sm={6}>
                     <TextField
-                        id='living_city'
-                        name='livingCity'
+                        id='city'
+                        name='city'
                         label='Город проживания'
                         fullWidth
                         onChange={formik.handleChange}
-                        value={formik.values.livingCity}
-                    />
-                </Grid>
-                <Grid item xs={9} sm={3}>
-                    <TextField
-                        id='living_street'
-                        name='livingStreet'
-                        label='Улица проживания'
-                        fullWidth
-                        onChange={formik.handleChange}
-                        value={formik.values.livingStreet}
-                    />
-                </Grid>
-                <Grid item xs={3} sm={1}>
-                    <TextField
-                        id='living_house_number'
-                        name='livingHouseNumber'
-                        label='Дом'
-                        fullWidth
-                        onChange={formik.handleChange}
-                        value={formik.values.livingHouseNumber}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <TextField
-                        id='working_country'
-                        name='workingCountry'
-                        label='Страна рабочего места'
-                        fullWidth
-                        onChange={formik.handleChange}
-                        value={formik.values.workingCountry}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <TextField
-                        id='working_city'
-                        name='workingCity'
-                        label='Город рабочего места'
-                        fullWidth
-                        onChange={formik.handleChange}
-                        value={formik.values.workingCity}
-                    />
-                </Grid>
-                <Grid item xs={9} sm={3}>
-                    <TextField
-                        id='working_street'
-                        name='workingStreet'
-                        label='Улица рабочего места'
-                        fullWidth
-                        onChange={formik.handleChange}
-                        value={formik.values.workingStreet}
-                    />
-                </Grid>
-                <Grid item xs={3} sm={1}>
-                    <TextField
-                        id='working_house_number'
-                        name='workingHouseNumber'
-                        label='Дом'
-                        fullWidth
-                        onChange={formik.handleChange}
-                        value={formik.values.workingHouseNumber}
+                        value={formik.values.city}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -217,13 +125,13 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
-                        id='working_position'
-                        name='workingPosition'
+                        id='position'
+                        name='position'
                         label='Должность'
                         fullWidth
                         required
                         onChange={formik.handleChange}
-                        value={formik.values.workingPosition}
+                        value={formik.values.position}
                     />
                 </Grid>
                 <Grid item xs={10}>

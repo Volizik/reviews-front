@@ -5,6 +5,7 @@ export interface Review {
     text: string;
     creatorId: number;
     createdAt: string;
+    updatedAt: string;
     worker: Worker;
 }
 
