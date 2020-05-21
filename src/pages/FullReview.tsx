@@ -115,14 +115,12 @@ export const FullReview: FC = () => {
                         </Grid>
                         <Grid item xs={12} md={8}>
                             <Typography variant='h5' gutterBottom>
-                                <strong>Адрес проживания:</strong>{' '}
-                                {review.worker.country},{' '}
-                                {review.worker.city}
+                                <strong>Адрес:</strong> {review.country},{' '}
+                                {review.city}
                             </Typography>
                             <Typography variant='h5' gutterBottom>
                                 <strong>Место работы:</strong>{' '}
-                                {review.worker.workingPlace}{' '}
-                                {review.worker.position}
+                                {review.workingPlace} {review.position}
                             </Typography>
                             <Typography
                                 variant='h5'

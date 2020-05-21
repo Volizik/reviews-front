@@ -3,10 +3,10 @@ import { client } from './';
 import { ReviewFormDTO } from '../components/forms/ReviewForm';
 import { Review, ReviewsFilterDTO } from '../interfaces/review';
 
-export const getAllReviews = async (
-    reviewsFilterDTO: ReviewsFilterDTO = {},
-): Promise<AxiosResponse<Review[]>> => {
-    return client.get('/review', { params: reviewsFilterDTO });
+export const getAllReviews = async ({
+    workerId,
+}: ReviewsFilterDTO): Promise<AxiosResponse<Review[]>> => {
+    return client.get('/review', { params: { workerId } });
 };
 
 export const getReviewById = async (
@@ -15,7 +15,10 @@ export const getReviewById = async (
     return client.get(`/review/${id}`);
 };
 
-const createReviewFormData = (data: ReviewFormDTO, photo: File | null): FormData => {
+const createReviewFormData = (
+    data: ReviewFormDTO,
+    photo: File | null,
+): FormData => {
     const formData = new FormData();
 
     formData.append('photo', photo || '');
@@ -27,9 +30,10 @@ const createReviewFormData = (data: ReviewFormDTO, photo: File | null): FormData
     formData.append('position', data.position);
     formData.append('workingPlace', data.workingPlace);
     formData.append('text', data.text);
+    formData.append('tin', data.tin);
 
     return formData;
-}
+};
 
 export const createReview = async (
     data: ReviewFormDTO,
@@ -62,4 +66,10 @@ export const deleteReview = async (
     reviewId: string,
 ): Promise<AxiosResponse> => {
     return client.delete(`/review/${reviewId}`);
+};
+
+export const getMyReviews = async (
+    creatorId: string,
+): Promise<AxiosResponse<Review[]>> => {
+    return client.get(`/review/my`, { params: { creatorId } });
 };

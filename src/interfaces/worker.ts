@@ -1,11 +1,9 @@
 export interface Worker {
+    id: string;
     firstName: string;
     lastName: string;
     fatherName: string;
-    country: string;
-    city: string;
-    workingPlace: string;
-    position: string;
+    tin: string;
     photos: Photo[];
     creatorId: number;
     createdAt: string;

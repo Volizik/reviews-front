@@ -3,9 +3,11 @@ import { Review } from '../../interfaces/review';
 
 export interface ReviewState {
     list: Review[];
+    my: Review[];
 }
 export const initialState: ReviewState = {
     list: [],
+    my: [],
 };
 
 export const reviewReducer = (
@@ -17,6 +19,11 @@ export const reviewReducer = (
             return {
                 ...state,
                 list: action.payload,
+            };
+        case 'SET_MY_REVIEWS':
+            return {
+                ...state,
+                my: action.payload,
             };
         default:
             return state;

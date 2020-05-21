@@ -39,7 +39,7 @@ export const ReviewFilters = () => {
                 <Typography className={classes.heading}>Фильтры</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-                <ReviewsFilterForm />
+                {/*<ReviewsFilterForm />*/}
             </ExpansionPanelDetails>
         </ExpansionPanel>
     );

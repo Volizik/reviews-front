@@ -14,24 +14,34 @@ const useStyles = makeStyles({
         display: 'flex',
     },
     cardDetails: {
+        position: 'relative',
         flex: 1,
+        width: 'calc(100% - 160px)',
     },
     cardMedia: {
         width: 160,
     },
+    description: {
+        maxWidth: '100%',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        display: 'inline-block',
+        whiteSpace: 'nowrap',
+    },
 });
 
-export type ShortPostProps = {
+export type ReviewShortPostProps = {
     id: number;
-    title: string;
+    workerName: string;
+    workerPosition: string;
     date: string;
     description: string;
     image: string;
 };
 
-export const ShortPost: FC<ShortPostProps> = (props) => {
+export const ReviewShortPost: FC<ReviewShortPostProps> = (props) => {
     const classes = useStyles();
-    const { title, date, description, image, id } = props;
+    const { workerName, workerPosition, date, description, image, id } = props;
 
     return (
         <Grid item xs={12}>
@@ -41,14 +51,22 @@ export const ShortPost: FC<ShortPostProps> = (props) => {
                         <div className={classes.cardDetails}>
                             <CardContent>
                                 <Typography component='h2' variant='h5'>
-                                    {title}
+                                    {workerName}
                                 </Typography>
                                 <Typography
                                     variant='subtitle1'
                                     color='textSecondary'>
                                     {date}
                                 </Typography>
-                                <Typography variant='subtitle1' paragraph>
+                                <Typography
+                                    variant='subtitle1'
+                                    color='textSecondary'>
+                                    {workerPosition}
+                                </Typography>
+                                <Typography
+                                    variant='subtitle1'
+                                    paragraph
+                                    className={classes.description}>
                                     {description}
                                 </Typography>
                             </CardContent>
@@ -57,7 +75,7 @@ export const ShortPost: FC<ShortPostProps> = (props) => {
                             <CardMedia
                                 className={classes.cardMedia}
                                 image={image}
-                                title={title}
+                                title={workerName}
                             />
                         </Hidden>
                     </Card>

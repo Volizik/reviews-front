@@ -1,21 +1,18 @@
-import React, { useEffect } from 'react';
-import { ReviewShortPost } from '../components/ReviewShortPost';
-import { Review } from '../interfaces/review';
+import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getReviewsThunk } from '../store/review/thunks';
 import { AppState } from '../store';
-import { useParams } from 'react-router-dom';
+import { Review } from '../interfaces/review';
+import { ReviewShortPost } from '../components/ReviewShortPost';
+import { getMyReviewsThunk } from '../store/review/thunks';
 
-export const Reviews = () => {
-    const reviews = useSelector<AppState, Review[]>(
-        (state) => state.review.list,
-    );
+export const MyReviews: FC = () => {
+    const myId = useSelector<AppState, string>((state) => state.user.info.id);
+    const reviews = useSelector<AppState, Review[]>((state) => state.review.my);
     const dispatch = useDispatch();
-    const { id } = useParams();
 
     useEffect(() => {
-        dispatch(getReviewsThunk({ workerId: id }));
-    }, [dispatch, id]);
+        dispatch(getMyReviewsThunk(myId));
+    }, [myId, dispatch]);
 
     return (
         <>

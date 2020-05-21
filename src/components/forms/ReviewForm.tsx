@@ -10,6 +10,7 @@ export interface ReviewFormDTO {
     firstName: string;
     lastName: string;
     fatherName: string;
+    tin: string;
     country: string;
     city: string;
     position: string;
@@ -25,6 +26,7 @@ export const ReviewForm: FC<ReviewFormProps> = ({
     fatherName = '',
     firstName = '',
     lastName = '',
+    tin = '',
     text = '',
     workingPlace = '',
     position = '',
@@ -40,6 +42,7 @@ export const ReviewForm: FC<ReviewFormProps> = ({
             lastName,
             fatherName,
             city,
+            tin,
             country,
             position,
             workingPlace,
@@ -93,11 +96,22 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                         value={formik.values.fatherName}
                     />
                 </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        id='tin'
+                        name='tin'
+                        label='ИНН'
+                        fullWidth
+                        autoComplete='tin'
+                        onChange={formik.handleChange}
+                        value={formik.values.tin}
+                    />
+                </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField
                         id='country'
                         name='country'
-                        label='Страна проживания'
+                        label='Страна'
                         fullWidth
                         onChange={formik.handleChange}
                         value={formik.values.country}
@@ -107,7 +121,7 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                     <TextField
                         id='city'
                         name='city'
-                        label='Город проживания'
+                        label='Город работы'
                         fullWidth
                         onChange={formik.handleChange}
                         value={formik.values.city}

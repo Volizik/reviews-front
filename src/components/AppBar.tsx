@@ -28,7 +28,11 @@ const useStyles = makeStyles((theme: Theme) =>
         link: {
             color: 'white',
             textDecoration: 'none',
-        }
+        },
+        menu: {
+            display: 'flex',
+            alignItems: 'center',
+        },
     }),
 );
 
@@ -58,15 +62,13 @@ export const LoginLogoutButtons: FC = () => {
                     Выйти
                 </Button>
             ) : (
-                <Link
-                    to='/login'
-                    className={classes.link}>
+                <Link to='/login' className={classes.link}>
                     <Button color='inherit'>Войти</Button>
                 </Link>
             )}
         </>
-    )
-}
+    );
+};
 
 export const AppBar: FC = () => {
     const classes = useStyles();
@@ -76,42 +78,58 @@ export const AppBar: FC = () => {
             <AppBarStyled position='static'>
                 <Toolbar>
                     {isAuthenticated() && (
-                        <Media query="(max-width: 599px)" render={() => (
-                            <Menu />
-                        )}/>
+                        <Media
+                            query='(max-width: 599px)'
+                            render={() => <Menu />}
+                        />
                     )}
-                    <Link
-                        to='/'
-                        className={`${classes.title} ${classes.link}`}>
+                    <Link to='/' className={`${classes.title} ${classes.link}`}>
                         <Typography variant='h6'>Reviews</Typography>
                     </Link>
 
                     {isAuthenticated() && (
-                        <Media query="(min-width: 600px)" render={() => (
-                            <div>
-                                {menuList.map((menuItem) => (
-                                    <Link
-                                        to={menuItem.link}
-                                        className={classes.link}
-                                        key={menuItem.link}>
-                                        <ListItem button title={menuItem.name}>
-                                            <Media query={{ maxWidth: 800 }}>
-                                                {matches =>
-                                                    matches ? (
-                                                        <ListItemIcon style={{minWidth: 'inherit', color: '#fff'}}>{menuItem.icon}</ListItemIcon>
-                                                    ) : (
-                                                        <ListItemText primary={menuItem.name} />
-                                                    )
-                                                }
-                                            </Media>
-                                        </ListItem>
-                                    </Link>
-                                ))}
-                            </div>
-                        )}/>
+                        <Media
+                            query='(min-width: 600px)'
+                            render={() => (
+                                <div className={classes.menu}>
+                                    {menuList.map((menuItem) => (
+                                        <Link
+                                            to={menuItem.link}
+                                            className={classes.link}
+                                            key={menuItem.link}>
+                                            <ListItem
+                                                button
+                                                title={menuItem.name}>
+                                                <Media
+                                                    query={{ maxWidth: 800 }}>
+                                                    {(matches) =>
+                                                        matches ? (
+                                                            <ListItemIcon
+                                                                style={{
+                                                                    minWidth:
+                                                                        'inherit',
+                                                                    color:
+                                                                        '#fff',
+                                                                }}>
+                                                                {menuItem.icon}
+                                                            </ListItemIcon>
+                                                        ) : (
+                                                            <ListItemText
+                                                                primary={
+                                                                    menuItem.name
+                                                                }
+                                                            />
+                                                        )
+                                                    }
+                                                </Media>
+                                            </ListItem>
+                                        </Link>
+                                    ))}
+                                </div>
+                            )}
+                        />
                     )}
                     <LoginLogoutButtons />
-
                 </Toolbar>
             </AppBarStyled>
         </div>

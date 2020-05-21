@@ -10,6 +10,8 @@ import { FullReview } from './pages/FullReview';
 import { Reviews } from './pages/Reviews';
 import { isAuthenticated } from './services/auth';
 import { EditReview } from './pages/EditReview';
+import { Workers } from './pages/Workers';
+import { MyReviews } from './pages/MyReviews';
 
 interface CustomRouteProps extends RouteProps {
     page: FC<any>;
@@ -65,7 +67,19 @@ const PublicRoute: FC<PublicRouteProps> = ({
 
 export const Router: FC = () => (
     <Switch>
-        <PublicRoute path='/' page={Reviews} layout={MainLayout} exact />
+        <PublicRoute path='/' page={Workers} layout={MainLayout} exact />
+        <PublicRoute
+            path='/worker/:id'
+            page={Reviews}
+            layout={MainLayout}
+            exact
+        />
+        <PrivateRoute
+            path='/review/my'
+            page={MyReviews}
+            layout={MainLayout}
+            exact
+        />
         <PrivateRoute
             path='/review/add'
             page={CreateReview}

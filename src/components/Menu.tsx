@@ -8,6 +8,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AddIcon from '@material-ui/icons/Add';
+import MapIcon from '@material-ui/icons/Map';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) =>
@@ -35,6 +36,11 @@ export const menuList: MenuListItem[] = [
         name: 'Добавить отзыв',
         icon: <AddIcon />,
         link: '/review/add',
+    },
+    {
+        name: 'Мои отзывы',
+        icon: <MapIcon />,
+        link: '/review/my',
     },
 ];
 

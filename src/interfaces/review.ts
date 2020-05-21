@@ -6,9 +6,13 @@ export interface Review {
     creatorId: number;
     createdAt: string;
     updatedAt: string;
+    country: string;
+    city: string;
+    workingPlace: string;
+    position: string;
     worker: Worker;
 }
 
 export interface ReviewsFilterDTO {
-    byCreator?: string;
+    workerId?: string;
 }

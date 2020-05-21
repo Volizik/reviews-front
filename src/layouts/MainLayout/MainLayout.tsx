@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
@@ -6,8 +6,6 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { Copyright } from '../../components/Copyright';
 import { AppBar } from '../../components/AppBar';
-import { useDispatch } from 'react-redux';
-import { getReviewsThunk } from '../../store/review/thunks';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,11 +32,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const MainLayout: FC = ({ children }) => {
     const classes = useStyles();
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getReviewsThunk());
-    });
 
     return (
         <div className={classes.root}>
@@ -49,7 +42,7 @@ export const MainLayout: FC = ({ children }) => {
                 <Container maxWidth='lg' className={classes.container}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            <div className={classes.paper}>{children}</div>
+                            {children}
                         </Grid>
                     </Grid>
                     <Box pt={4}>
