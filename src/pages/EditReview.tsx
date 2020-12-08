@@ -27,6 +27,7 @@ export const EditReview: FC = () => {
     };
 
     useEffect(() => {
+        console.log(id);
         const getReview = async () => {
             if (id) {
                 setIsLoading(true);

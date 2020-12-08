@@ -7,11 +7,14 @@ import { AuthLayout } from './layouts/AuthLayout';
 import { MainLayout } from './layouts/MainLayout';
 import { CreateReview } from './pages/CreateReview';
 import { FullReview } from './pages/FullReview';
-import { Reviews } from './pages/Reviews';
+import { Worker } from './pages/Worker';
 import { isAuthenticated } from './services/auth';
 import { EditReview } from './pages/EditReview';
 import { Workers } from './pages/Workers';
 import { MyReviews } from './pages/MyReviews';
+import { HomePage } from './pages/HomePage';
+import { WorkerPage } from './pages/WorkerPage';
+import { EmployerPage } from './pages/EmployerPage';
 
 interface CustomRouteProps extends RouteProps {
     page: FC<any>;
@@ -67,10 +70,16 @@ const PublicRoute: FC<PublicRouteProps> = ({
 
 export const Router: FC = () => (
     <Switch>
-        <PublicRoute path='/' page={Workers} layout={MainLayout} exact />
+        <PublicRoute path='/' page={HomePage} layout={MainLayout} exact />
         <PublicRoute
-            path='/worker/:id'
-            page={Reviews}
+            path='/employee/:id'
+            page={WorkerPage}
+            layout={MainLayout}
+            exact
+        />
+        <PublicRoute
+            path='/employer/:id'
+            page={EmployerPage}
             layout={MainLayout}
             exact
         />

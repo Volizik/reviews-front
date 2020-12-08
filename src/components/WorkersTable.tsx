@@ -157,7 +157,7 @@ export const WorkersTable: FC<TableProps> = ({ rows }) => {
         event: React.MouseEvent<HTMLTableRowElement>,
         id: string,
     ) => {
-        history.push(`/worker/${id}`);
+        history.push(`/employee/${id}`);
     };
 
     return (
